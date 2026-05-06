@@ -109,8 +109,8 @@ main { padding: 16px; min-width: 0; overflow-x: auto; }
 .filter-btn.active { background: #1a237e; color: #fff; border-color: #1a237e; }
 
 /* constituency table */
-.table-wrap { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
-table#ac-table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+.table-wrap { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow-x: auto; }
+table#ac-table { width: 100%; min-width: 860px; border-collapse: collapse; font-size: .8rem; }
 table#ac-table thead th {
   background: #f7f8fb; padding: 9px 10px; text-align: left;
   font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
@@ -200,11 +200,8 @@ tr.detail-row td { padding: 0; background: #fafbff; }
   .detail-panel { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
-  header { flex-wrap: wrap; height: auto; min-height: var(--hdr); padding: 8px 12px; gap: 4px; }
-  header h1 { font-size: .78rem; flex: 1 1 100%; line-height: 1.3; white-space: normal; }
-  .hdr-pills { gap: 6px; flex-wrap: wrap; }
-  .hdr-pill { font-size: .65rem; padding: 2px 8px; }
-  .cards { grid-template-columns: 1fr 1fr; }
+  header h1 { font-size: .78rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .hdr-pills { display: none; }
 }
 </style>
 </head>
