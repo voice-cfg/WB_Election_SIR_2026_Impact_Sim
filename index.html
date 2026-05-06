@@ -245,32 +245,32 @@ tr.detail-row td { padding: 0; background: #fafbff; }
       </div>
 
       <div class="ctrl-section" id="ctrl-muslim">
-        <h3>Muslim Vote Split</h3>
-        <div class="split-grid" data-group="muslim">
-          <div class="split-row"><span class="split-label tmc">TMC</span><input type="range" data-party="tmc" min="0" max="100" value="80" step="1"><span class="split-val" data-val="tmc">80%</span></div>
-          <div class="split-row"><span class="split-label bjp">BJP</span><input type="range" data-party="bjp" min="0" max="100" value="1" step="1"><span class="split-val" data-val="bjp">1%</span></div>
-          <div class="split-row"><span class="split-label cpim">CPIM</span><input type="range" data-party="cpim" min="0" max="100" value="6" step="1"><span class="split-val" data-val="cpim">6%</span></div>
-          <div class="split-row"><span class="split-label inc">INC</span><input type="range" data-party="inc" min="0" max="100" value="7" step="1"><span class="split-val" data-val="inc">7%</span></div>
-        </div>
-        <div class="others-row"><span>Rest → minor/independent candidates</span><span class="others-val" id="muslim-oth">6%</span></div>
-      </div>
-
-      <div class="ctrl-section" id="ctrl-hindu">
         <h3>Hindu Vote Split</h3>
         <div class="split-grid" data-group="hindu">
-          <div class="split-row"><span class="split-label tmc">TMC</span><input type="range" data-party="tmc" min="0" max="100" value="25" step="1"><span class="split-val" data-val="tmc">25%</span></div>
           <div class="split-row"><span class="split-label bjp">BJP</span><input type="range" data-party="bjp" min="0" max="100" value="60" step="1"><span class="split-val" data-val="bjp">60%</span></div>
+          <div class="split-row"><span class="split-label tmc">TMC</span><input type="range" data-party="tmc" min="0" max="100" value="25" step="1"><span class="split-val" data-val="tmc">25%</span></div>
           <div class="split-row"><span class="split-label cpim">CPIM</span><input type="range" data-party="cpim" min="0" max="100" value="5" step="1"><span class="split-val" data-val="cpim">5%</span></div>
           <div class="split-row"><span class="split-label inc">INC</span><input type="range" data-party="inc" min="0" max="100" value="6" step="1"><span class="split-val" data-val="inc">6%</span></div>
         </div>
         <div class="others-row"><span>Rest → minor/independent candidates</span><span class="others-val" id="hindu-oth">4%</span></div>
       </div>
 
+      <div class="ctrl-section" id="ctrl-muslim">
+        <h3>Muslim Vote Split</h3>
+        <div class="split-grid" data-group="muslim">
+          <div class="split-row"><span class="split-label bjp">BJP</span><input type="range" data-party="bjp" min="0" max="100" value="1" step="1"><span class="split-val" data-val="bjp">1%</span></div>
+          <div class="split-row"><span class="split-label tmc">TMC</span><input type="range" data-party="tmc" min="0" max="100" value="80" step="1"><span class="split-val" data-val="tmc">80%</span></div>
+          <div class="split-row"><span class="split-label cpim">CPIM</span><input type="range" data-party="cpim" min="0" max="100" value="6" step="1"><span class="split-val" data-val="cpim">6%</span></div>
+          <div class="split-row"><span class="split-label inc">INC</span><input type="range" data-party="inc" min="0" max="100" value="7" step="1"><span class="split-val" data-val="inc">7%</span></div>
+        </div>
+        <div class="others-row"><span>Rest → minor/independent candidates</span><span class="others-val" id="muslim-oth">6%</span></div>
+      </div>
+
       <div class="ctrl-section" id="ctrl-other">
         <h3>Other Religion Split</h3>
         <div class="split-grid" data-group="other">
-          <div class="split-row"><span class="split-label tmc">TMC</span><input type="range" data-party="tmc" min="0" max="100" value="41" step="1"><span class="split-val" data-val="tmc">41%</span></div>
           <div class="split-row"><span class="split-label bjp">BJP</span><input type="range" data-party="bjp" min="0" max="100" value="46" step="1"><span class="split-val" data-val="bjp">46%</span></div>
+          <div class="split-row"><span class="split-label tmc">TMC</span><input type="range" data-party="tmc" min="0" max="100" value="41" step="1"><span class="split-val" data-val="tmc">41%</span></div>
           <div class="split-row"><span class="split-label cpim">CPIM</span><input type="range" data-party="cpim" min="0" max="100" value="5" step="1"><span class="split-val" data-val="cpim">5%</span></div>
           <div class="split-row"><span class="split-label inc">INC</span><input type="range" data-party="inc" min="0" max="100" value="5" step="1"><span class="split-val" data-val="inc">5%</span></div>
         </div>
@@ -281,7 +281,7 @@ tr.detail-row td { padding: 0; background: #fafbff; }
 
       <div class="ctrl-section" style="font-size:.68rem;color:#5a7a9a;line-height:1.6">
         <p><b>Net deleted</b> = OpenCity confirmed diff (Jan 2026 draft → election-day final roll). Religion split via Susewind 2021 name-based analysis.</p>
-        <p style="margin-top:6px"><b>Assumes</b> ASDD (dead/duplicate/shifted) voters would not vote. Only the post-draft 25.7L are simulated.</p>
+        <p style="margin-top:6px"><b>Assumes</b> ASDD (dead/duplicate/shifted) voters would not vote. Only the post-draft 26.5L are simulated.</p>
       </div>
       <div class="ctrl-section" style="background:#2a1a0a;border-left:3px solid #f59e0b;font-size:.68rem;color:#fcd34d;line-height:1.6">
         <p style="font-weight:700;margin-bottom:4px">⚠ Constituency religion data is estimated</p>
@@ -377,7 +377,7 @@ const DEFAULTS = {
   hindu:  { tmc: 25, bjp: 60, cpim: 5, inc: 6  },
   other:  { tmc: 41, bjp: 46, cpim: 5, inc: 5  },
 }
-const PARTIES = ['tmc','bjp','cpim','inc']
+const PARTIES = ['bjp','tmc','cpim','inc']
 const PARTY_LABEL = { tmc:'TMC', bjp:'BJP', cpim:'CPIM', inc:'INC', others:'Others' }
 const PARTY_COLOR = { tmc:'#1a7a32', bjp:'#c2600a', cpim:'#b71c1c', inc:'#1565c0', others:'#555' }
 
