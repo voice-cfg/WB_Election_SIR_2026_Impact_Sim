@@ -200,8 +200,10 @@ tr.detail-row td { padding: 0; background: #fafbff; }
   .detail-panel { grid-template-columns: 1fr; }
 }
 @media (max-width: 900px) {
-  .hdr-pills { display: none; }
-  header h1 { font-size: .85rem; white-space: normal; line-height: 1.3; }
+  header { flex-wrap: wrap; height: auto; padding: 8px 12px; gap: 6px; }
+  header h1 { flex: 1 1 100%; font-size: .88rem; }
+  .hdr-pills { flex-wrap: wrap; gap: 6px; }
+  .hdr-pill { font-size: .72rem; }
 }
 </style>
 </head>
