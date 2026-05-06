@@ -73,8 +73,6 @@ aside {
 .others-val { font-weight: 700; }
 .others-val.warn { color: #ff8a65; }
 
-.warn-box { background: #3a1a1a; border: 1px solid #c0392b; border-radius: 4px; padding: 6px 10px; font-size: .7rem; color: #ef9a9a; margin-top: 6px; display: none; }
-.warn-box.show { display: block; }
 
 .reset-btn { display: block; width: calc(100% - 32px); margin: 12px 16px; padding: 8px; background: #2a3f55; color: #90caf9; border: 1px solid #3a5570; border-radius: var(--radius); font-size: .8rem; transition: background .15s; }
 .reset-btn:hover { background: #3a5570; }
@@ -245,12 +243,11 @@ tr.detail-row td { padding: 0; background: #fafbff; }
         <h3>Muslim Vote Split</h3>
         <div class="split-grid" data-group="muslim">
           <div class="split-row"><span class="split-label tmc">TMC</span><input type="range" data-party="tmc" min="0" max="100" value="80" step="1"><span class="split-val" data-val="tmc">80%</span></div>
-          <div class="split-row"><span class="split-label bjp">BJP</span><input type="range" data-party="bjp" min="0" max="100" value="0" step="1"><span class="split-val" data-val="bjp">0%</span></div>
-          <div class="split-row"><span class="split-label cpim">CPIM</span><input type="range" data-party="cpim" min="0" max="100" value="0" step="1"><span class="split-val" data-val="cpim">0%</span></div>
-          <div class="split-row"><span class="split-label inc">INC</span><input type="range" data-party="inc" min="0" max="100" value="0" step="1"><span class="split-val" data-val="inc">0%</span></div>
+          <div class="split-row"><span class="split-label bjp">BJP</span><input type="range" data-party="bjp" min="0" max="100" value="1" step="1"><span class="split-val" data-val="bjp">1%</span></div>
+          <div class="split-row"><span class="split-label cpim">CPIM</span><input type="range" data-party="cpim" min="0" max="100" value="6" step="1"><span class="split-val" data-val="cpim">6%</span></div>
+          <div class="split-row"><span class="split-label inc">INC</span><input type="range" data-party="inc" min="0" max="100" value="7" step="1"><span class="split-val" data-val="inc">7%</span></div>
         </div>
-        <div class="others-row"><span>Others (auto)</span><span class="others-val" id="muslim-oth">20%</span></div>
-        <div class="warn-box" id="muslim-warn">Values exceed 100% — reduce sliders</div>
+        <div class="others-row"><span>Rest → minor/independent candidates</span><span class="others-val" id="muslim-oth">6%</span></div>
       </div>
 
       <div class="ctrl-section" id="ctrl-hindu">
@@ -258,11 +255,10 @@ tr.detail-row td { padding: 0; background: #fafbff; }
         <div class="split-grid" data-group="hindu">
           <div class="split-row"><span class="split-label tmc">TMC</span><input type="range" data-party="tmc" min="0" max="100" value="25" step="1"><span class="split-val" data-val="tmc">25%</span></div>
           <div class="split-row"><span class="split-label bjp">BJP</span><input type="range" data-party="bjp" min="0" max="100" value="60" step="1"><span class="split-val" data-val="bjp">60%</span></div>
-          <div class="split-row"><span class="split-label cpim">CPIM</span><input type="range" data-party="cpim" min="0" max="100" value="0" step="1"><span class="split-val" data-val="cpim">0%</span></div>
-          <div class="split-row"><span class="split-label inc">INC</span><input type="range" data-party="inc" min="0" max="100" value="0" step="1"><span class="split-val" data-val="inc">0%</span></div>
+          <div class="split-row"><span class="split-label cpim">CPIM</span><input type="range" data-party="cpim" min="0" max="100" value="5" step="1"><span class="split-val" data-val="cpim">5%</span></div>
+          <div class="split-row"><span class="split-label inc">INC</span><input type="range" data-party="inc" min="0" max="100" value="6" step="1"><span class="split-val" data-val="inc">6%</span></div>
         </div>
-        <div class="others-row"><span>Others (auto)</span><span class="others-val" id="hindu-oth">15%</span></div>
-        <div class="warn-box" id="hindu-warn">Values exceed 100% — reduce sliders</div>
+        <div class="others-row"><span>Rest → minor/independent candidates</span><span class="others-val" id="hindu-oth">4%</span></div>
       </div>
 
       <div class="ctrl-section" id="ctrl-other">
@@ -273,8 +269,7 @@ tr.detail-row td { padding: 0; background: #fafbff; }
           <div class="split-row"><span class="split-label cpim">CPIM</span><input type="range" data-party="cpim" min="0" max="100" value="5" step="1"><span class="split-val" data-val="cpim">5%</span></div>
           <div class="split-row"><span class="split-label inc">INC</span><input type="range" data-party="inc" min="0" max="100" value="5" step="1"><span class="split-val" data-val="inc">5%</span></div>
         </div>
-        <div class="others-row"><span>Others (auto)</span><span class="others-val" id="other-oth">3%</span></div>
-        <div class="warn-box" id="other-warn">Values exceed 100% — reduce sliders</div>
+        <div class="others-row"><span>Rest → minor/independent candidates</span><span class="others-val" id="other-oth">3%</span></div>
       </div>
 
       <button class="reset-btn" id="reset-btn">↺ Reset to Defaults</button>
@@ -368,8 +363,8 @@ tr.detail-row td { padding: 0; background: #fafbff; }
 ════════════════════════════════════════════════════════════ */
 const DEFAULTS = {
   turnout: 90,
-  muslim: { tmc: 80, bjp: 0,  cpim: 0, inc: 0  },
-  hindu:  { tmc: 25, bjp: 60, cpim: 0, inc: 0  },
+  muslim: { tmc: 80, bjp: 1,  cpim: 6, inc: 7  },
+  hindu:  { tmc: 25, bjp: 60, cpim: 5, inc: 6  },
   other:  { tmc: 41, bjp: 46, cpim: 5, inc: 5  },
 }
 const PARTIES = ['tmc','bjp','cpim','inc']
@@ -636,7 +631,7 @@ function buildDetailPanel(r, acNo) {
     const oth = othersVal(sp)
     return `<div style="margin-bottom:4px;font-size:.72rem;font-weight:700;color:#555">${groupLabel}</div>
       ${parties}
-      <div class="ov-others"><span>Others (auto)</span><span id="ov-${acNo}-${group}-oth">${oth}%</span></div>`
+      <div class="ov-others"><span>Rest → minor/independent</span><span id="ov-${acNo}-${group}-oth">${oth}%</span></div>`
   }
 
   const usedParams = ov || G.params
@@ -820,9 +815,6 @@ function wireGlobalControls() {
         const s = sumSplit(sp)
         const oth = Math.max(0, 100 - s)
         document.getElementById(`${group}-oth`).textContent = oth + '%'
-        const warn = document.getElementById(`${group}-warn`)
-        if (s > 100) { warn.classList.add('show'); document.getElementById(`${group}-oth`).classList.add('warn') }
-        else          { warn.classList.remove('show'); document.getElementById(`${group}-oth`).classList.remove('warn') }
         render()
       })
     })
@@ -843,7 +835,6 @@ function wireGlobalControls() {
         grid.querySelector(`[data-val="${p}"]`).textContent = DEFAULTS[group][p] + '%'
       })
       document.getElementById(`${group}-oth`).textContent = othersVal(DEFAULTS[group]) + '%'
-      document.getElementById(`${group}-warn`).classList.remove('show')
     })
     render()
   })
