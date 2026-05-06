@@ -458,15 +458,28 @@ function simulate(acNo, params, relOverride) {
 
   const sp = params
 
+  // Redistribute Others (auto) proportionally back to TMC/BJP/CPIM/INC
+  function effectiveSplit(s) {
+    const majorSum = s.tmc + s.bjp + s.cpim + s.inc
+    if (majorSum <= 0) return s
+    const oth = Math.max(0, 100 - majorSum)
+    return {
+      tmc:  s.tmc  + oth * s.tmc  / majorSum,
+      bjp:  s.bjp  + oth * s.bjp  / majorSum,
+      cpim: s.cpim + oth * s.cpim / majorSum,
+      inc:  s.inc  + oth * s.inc  / majorSum,
+    }
+  }
+  const hSp = effectiveSplit(sp.hindu)
+  const mSp = effectiveSplit(sp.muslim)
+  const oSp = effectiveSplit(sp.other)
+
   // Extra votes per major group
-  const extraTmc  = vH * sp.hindu.tmc /100 + vM * sp.muslim.tmc /100 + vO * sp.other.tmc /100
-  const extraBjp  = vH * sp.hindu.bjp /100 + vM * sp.muslim.bjp /100 + vO * sp.other.bjp /100
-  const extraCpim = vH * sp.hindu.cpim/100 + vM * sp.muslim.cpim/100 + vO * sp.other.cpim/100
-  const extraInc  = vH * sp.hindu.inc /100 + vM * sp.muslim.inc /100 + vO * sp.other.inc /100
-  const hOth = othersVal(sp.hindu)
-  const mOth = othersVal(sp.muslim)
-  const oOth = othersVal(sp.other)
-  let   extraRest = vH * hOth/100 + vM * mOth/100 + vO * oOth/100
+  const extraTmc  = vH * hSp.tmc /100 + vM * mSp.tmc /100 + vO * oSp.tmc /100
+  const extraBjp  = vH * hSp.bjp /100 + vM * mSp.bjp /100 + vO * oSp.bjp /100
+  const extraCpim = vH * hSp.cpim/100 + vM * mSp.cpim/100 + vO * oSp.cpim/100
+  const extraInc  = vH * hSp.inc /100 + vM * mSp.inc /100 + vO * oSp.inc /100
+  let   extraRest = 0  // only accumulates votes re-routed from parties with no candidate
 
   // Build candidate list
   const candMap = {}   // group -> [{name, party, votes}]
