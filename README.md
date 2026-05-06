@@ -4,7 +4,7 @@
 
 An interactive browser-based simulator that estimates how the West Bengal Assembly Election 2026 results might have differed if voters deleted during the Special Intensive Revision (SIR) 2026 had been allowed to vote.
 
-**[Open Simulator →]([WB Election 2026: SIR 2026 — Deleted Voter Impact Simulator](https://voice-cfg.github.io/WB_Election_SIR_2026_Impact_Sim/))** *(Use Large Screen)*
+**Open Simulator →([WB Election 2026: SIR 2026 — Deleted Voter Impact Simulator](https://voice-cfg.github.io/WB_Election_SIR_2026_Impact_Sim/))** *(Use Large Screen)*
 
 ---
 
