@@ -103,13 +103,13 @@ It then recomputes vote totals and identifies which seats would have flipped, na
 
 Because the simulator fetches JSON files via `fetch()`, it must be served over HTTP — it will not auto-load if opened directly as a local file. Options:
 
-**GitHub Pages (recommended):** Enable GitHub Pages on the repository. Open `https://<username>.github.io/<repo>/sim.html`.
+**GitHub Pages (recommended):** Enable GitHub Pages on the repository. Open `https://<username>.github.io/<repo>/index.html`.
 
 **Local web server:**
 ```bash
 cd eci_data_wb
 python3 -m http.server 8000
-# then open http://localhost:8000/sim.html
+# then open http://localhost:8000/index.html
 ```
 
 **Manual file picker:** If auto-load fails, the page shows a file picker. Select `wb_election_results.json` and `wb_sir_religion_deletions.json` manually.
@@ -120,7 +120,7 @@ python3 -m http.server 8000
 
 | File | Description |
 |---|---|
-| `sim.html` | Interactive simulator (open this in a browser) |
+| `index.html` | Interactive simulator (open this in a browser) |
 | `wb_election_results.json` | ECI election results for all 294 constituencies |
 | `wb_sir_religion_deletions.json` | Net deletion counts and religion estimates per constituency |
 | `wb_eci_scraper_v5.py` | Script that scraped election results from ECI website |
