@@ -4,7 +4,7 @@
 
 An interactive browser-based simulator that estimates how the West Bengal Assembly Election 2026 results might have differed if voters deleted during the Special Intensive Revision (SIR) 2026 had been allowed to vote.
 
-**[Open Simulator →](https://voice-cfg.github.io/WB_Election_SIR_2026_Impact_Sim/)** *(Use large screen for better experience)*
+**[Open Simulator →]([WB Election 2026: SIR 2026 — Deleted Voter Impact Simulator](https://voice-cfg.github.io/WB_Election_SIR_2026_Impact_Sim/))** *(Use Large Screen)*
 
 ---
 
@@ -62,8 +62,14 @@ It then recomputes vote totals and identifies which seats would have flipped, na
 - Covers 272 of 294 constituencies; 22 hill/tribal constituencies (Darjeeling, Jalpaiguri, Kalimpong, parts of Malda) use district-level weighted averages as fallback
 - **Reliability: Medium** — published academic methodology, but based on 2021 rolls and name-pattern inference, not direct religion data
 
+> ⚠️ **Important — Constituency Religion Data Is Estimated**
+>
+> The Hindu%, Muslim%, and Other% figures shown for each constituency in the "Religion Mix" column are **estimates derived from name-pattern analysis of 2021 voter rolls**. They are not official ECI figures (ECI does not publish religion-wise voter data). There is a **high chance these proportions are inaccurate** for individual constituencies, especially in areas with mixed or tribal populations, or where the 2021 demographic composition has shifted.
+>
+> **If you believe the religion mix is wrong for a specific constituency**, click on that constituency row to open its detail panel and adjust the **Hindu% / Muslim%** sliders under "Deleted Voter Religion Mix". The simulation will immediately recalculate using your corrected values.
+
 ### 3. State-level Deletion Breakdown — Private Research Organisation (via The Week)
-- **Source:** The Week, ["More Muslim voters deleted than Hindus in West Bengal's SIR list"](https://www.theweek.in/news/india/2026/04/14/more-muslim-voters-deleted-than-hindus-in-west-bengals-sir-list.html), 14 April 2026
+- **Source:** The Week, ["More Muslim voters deleted than Hindus in West Bengal's SIR list?"](https://www.theweek.in/news/india/2026/04/14/more-muslim-voters-deleted-than-hindus-in-west-bengals-sir-list.html), 14 April 2026
 - Figures cited: 57.47 lakh Hindu (63.4%), 31.10 lakh Muslim (34.3%) of 90.62 lakh total deletions
 - **The research organisation is unnamed and has not published its methodology. These figures cannot be independently verified.**
 - **Reliability: Low–Medium** — widely reported in media but primary source is not public
@@ -138,3 +144,11 @@ python wb_sir_religion_deletions.py
 ---
 
 *Data current as of May 2026. Election results from West Bengal Assembly Election, May 2026.*
+
+---
+
+## Acknowledgements
+
+- **[Raphael Susewind](https://github.com/raphael-susewind)** (Oxford) — for the open religion classification of West Bengal voter rolls
+- **[OpenCity](https://data.opencity.in)** — for publishing machine-readable SIR electoral roll data
+- **[Claude Code](https://claude.ai/code)** (Anthropic) — this simulator, all data processing scripts, and this documentation were built with the assistance of Claude AI
