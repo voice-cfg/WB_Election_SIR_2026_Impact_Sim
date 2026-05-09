@@ -90,7 +90,7 @@ aside {
 main { padding: 16px; min-width: 0; overflow-x: auto; }
 
 /* summary cards */
-.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
 .card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; }
 .card-label { font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #888; margin-bottom: 4px; }
 .card-value { font-size: 1.6rem; font-weight: 800; line-height: 1; }
@@ -98,6 +98,7 @@ main { padding: 16px; min-width: 0; overflow-x: auto; }
 .card-flip .card-value { color: #e65100; }
 .card-deleted .card-value { color: #1565c0; }
 .card-cast .card-value { color: #2e7d32; }
+.card-highprob .card-value { color: #c62828; }
 
 /* party tally */
 .tally-wrap { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; margin-bottom: 16px; }
@@ -209,7 +210,7 @@ tr.detail-row td { padding: 0; background: #fafbff; }
   .hdr-pill { font-size: .72rem; }
   .layout { grid-template-columns: 1fr; }
   aside { position: static; height: auto; }
-  .cards { grid-template-columns: 1fr 1fr; }
+  .cards { grid-template-columns: 1fr 1fr 1fr; }
   .detail-panel { grid-template-columns: 1fr; }
 }
 </style>
@@ -317,6 +318,12 @@ tr.detail-row td { padding: 0; background: #fafbff; }
           <div class="card-label">Seats That Would Flip</div>
           <div class="card-value" id="stat-flipped">—</div>
           <div class="card-sub">out of 294 constituencies</div>
+        </div>
+        <div class="card card-highprob">
+          <div class="card-label">Seats at High Risk of Flip</div>
+          <div class="card-value" id="stat-highprob">—</div>
+          <div class="card-sub">margin &lt; 5000 &amp; &lt; deleted voters</div>
+          <div id="stat-highprob-parties" style="margin-top:5px;font-size:.68rem;line-height:1.8;"></div>
         </div>
         <div class="card">
           <div class="card-label">Seats With Changed Margin</div>
@@ -527,6 +534,10 @@ function simulate(acNo, params, relOverride) {
   const origMargin     = el.winning.margin || 0
   const origWinVotes   = el.winning.votes  || 0
 
+  const byOrigVotes    = [...simList].sort((a, b) => b.origVotes - a.origVotes)
+  const runnerParty    = byOrigVotes[1]?.party || ''
+  const runnerGroup    = classifyParty(runnerParty)
+
   const simWinner      = simList[0]
   const simMargin      = simList.length >= 2 ? simList[0].simVotes - simList[1].simVotes : simList[0]?.simVotes || 0
 
@@ -553,6 +564,8 @@ function simulate(acNo, params, relOverride) {
     simulated:   { winner: simWinner?.name || '?', party: simWinner?.party || '?', votes: simWinner?.simVotes || 0, margin: simMargin, group: newGroup },
     isFlipped, status,
     marginChange: simMargin - origMargin,
+    isHighProbFlip: origMargin < 5000 && origMargin < netDeleted,
+    runnerGroup,
   }
 }
 
@@ -574,10 +587,30 @@ function updateSummaryCards() {
   const totalCast    = G.simResults.reduce((s, r) => s + r.totalCast, 0)
   const flipped      = G.simResults.filter(r => r.isFlipped).length
   const changed      = G.simResults.filter(r => r.status !== 'same').length
+  const highProbSeats = G.simResults.filter(r => r.isHighProbFlip)
+  const highProb      = highProbSeats.length
+  const transfers = {}
+  for (const r of highProbSeats) {
+    if (r.original.group !== r.runnerGroup) {
+      const key = `${r.original.group}→${r.runnerGroup}`
+      transfers[key] = (transfers[key] || 0) + 1
+    }
+  }
+  const partyBreakdown = Object.entries(transfers)
+    .sort((a, b) => b[1] - a[1])
+    .map(([key, count]) => {
+      const [from, to] = key.split('→')
+      const fLabel = `<span style="color:${PARTY_COLOR[from]};font-weight:700">${PARTY_LABEL[from] || from.toUpperCase()}</span>`
+      const tLabel = `<span style="color:${PARTY_COLOR[to]};font-weight:700">${PARTY_LABEL[to] || to.toUpperCase()}</span>`
+      return `${count} ${fLabel} → ${tLabel}`
+    })
+    .join(',&nbsp;&nbsp;')
 
   document.getElementById('stat-deleted').textContent  = fmtL(totalDeleted)
   document.getElementById('stat-cast').textContent     = fmtL(totalCast)
   document.getElementById('stat-flipped').textContent  = flipped
+  document.getElementById('stat-highprob').textContent = highProb
+  document.getElementById('stat-highprob-parties').innerHTML = partyBreakdown
   document.getElementById('stat-changed').textContent  = changed
   document.getElementById('stat-turnout').textContent  = G.params.turnout
   document.getElementById('hdr-deleted').textContent   = fmtL(totalDeleted)
@@ -784,7 +817,7 @@ function renderTable() {
       </td>
       <td>${relBar(r.hPct, r.mPct, r.oPct)}</td>
       <td>${beforeCell}</td>
-      <td>${afterCell}</td>
+      <td${r.isHighProbFlip ? ' style="background:#fde8e8"' : ''}>${afterCell}</td>
       <td style="font-weight:700;color:${deltaColor}">${deltaSign}${fmt(r.marginChange)}</td>
       <td>${statusBadge(r.status)}</td>
       <td><button class="expand-btn${openRows.has(acNo) ? ' open' : ''}" data-ac="${acNo}">⚙</button></td>`
